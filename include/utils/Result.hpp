@@ -2,6 +2,7 @@
 
 #include <Macros.hpp>
 #include <string_view>
+#include <string>
 
 namespace geode {
     /**

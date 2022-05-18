@@ -2673,9 +2673,9 @@ class GameManager : GManager {
 	cocos2d::CCDictionary* m_customObjectDict;
 	double m_adTimer;
 	double m_adCache;
-	PAD = mac 0x8, win 0x8, android 0x0;
+	PAD = mac 0x8, win 0x8, android 0x8;
 	double m_unknownDouble;
-	PAD = mac 0x8, win 0x8, android 0x0;
+	PAD = mac 0x8, win 0x8, android 0x8;
 	bool m_loaded;
 	gd::string m_unknownString;
 	PlayLayer* m_playLayer;
@@ -2997,9 +2997,9 @@ class GameObject : CCSpritePlus {
 	bool m_isSaw;
 	int m_customRotateSpeed;
 	bool m_sawIsDisabled;
-	PAD = mac 0x4, win 0x4, android 0x0;
+	PAD = mac 0x4, win 0x4, android 0x4;
 	cocos2d::CCSprite* m_detailSprite;
-	PAD = mac 0x8, win 0x8, android 0x0;
+	PAD = mac 0x8, win 0x8, android 0x8;
 	bool m_isRotatedSide;
 	float m_unk2F4;
 	float m_unk2F8;
@@ -3026,7 +3026,7 @@ class GameObject : CCSpritePlus {
 	int m_targetColorID;
 	float m_scale;
 	int m_objectID;
-	PAD = mac 0x4, win 0x4, android 0x0;
+	PAD = mac 0x4, win 0x4, android 0x4;
 	bool m_unk368;
 	bool m_unk369;
 	bool m_unk36A;
@@ -3066,7 +3066,7 @@ class GameObject : CCSpritePlus {
 	bool m_unk3D9;
 	bool m_isSelected;
 	int m_globalClickCounter;
-	PAD = mac 0x8, win 0x8, android 0x0;
+	PAD = mac 0x8, win 0x8, android 0x8;
 	bool m_unknownLayerRelated;
 	float m_multiScaleMultiplier;
 	bool m_isGroupParent;

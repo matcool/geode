@@ -8,6 +8,8 @@
 #include <Macros.hpp>
 #include <any>
 #include <variant>
+#include <vector>
+#include <string>
 
 #ifndef GEODE_DLL
 #define GEODE_DLL

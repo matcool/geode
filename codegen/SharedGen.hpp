@@ -136,8 +136,10 @@ struct CacShare {
         if (f.function_type == kDestructor) return false;
         if (f.function_type == kConstructor) return false;
         if (f.parent_class->name.rfind("fmod::", 0) == 0) return true;
-        if (f.parent_class->name.rfind("cocos2d::", 0) == 0 && platform == kWindows) return true;
-        if (getParameterTypes(f).find("gd::", 0) != string::npos && platform == kAndroid) return false;
+        if (platform == kWindows && f.parent_class->name.rfind("cocos2d::", 0) == 0) return true;
+        // if (getParameterTypes(f).find("gd::", 0) != string::npos && platform == kAndroid) return false;
+        // TODO: is this the best way of doing this?
+        if (platform == kAndroid && f.parent_class->name.rfind("cocos2d::CCEGLView", 0) == 0) return false;
         if (platform == kAndroid) return true;
         return false;
     }
@@ -147,7 +149,7 @@ struct CacShare {
     	// basically this is true for
         // all funcs that we have the offset for
         // all funcs with stl parameter for android
-        if (getParameterTypes(f).find("gd::", 0) != string::npos && platform == kAndroid) return true;
+        // if (getParameterTypes(f).find("gd::", 0) != string::npos && platform == kAndroid) return true;
         if (getBind(f) != "") return true;
         return false;
     }

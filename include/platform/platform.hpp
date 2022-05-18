@@ -193,7 +193,7 @@ namespace std {
 	#define GEODE_API extern "C" __attribute__((visibility("default")))
 	#define GEODE_EXPORT __attribute__((visibility("default")))
 
-	#include "windows.hpp"
+	#include "android.hpp"
 
 #else
 	#define GEODE_ANDROID(...)

@@ -117,7 +117,7 @@ int main(int argc, char** argv) {
                     break;
             }
 
-            if (f.binds[CacShare::platform].size() == 0 && !f.is_defined) {
+            if (CacShare::platform != Platform::kAndroid && f.binds[CacShare::platform].size() == 0 && !f.is_defined) {
                 //continue;
                 // ok new idea
 
