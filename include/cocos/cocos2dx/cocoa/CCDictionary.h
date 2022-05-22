@@ -227,7 +227,11 @@ public:
      *  @endcode
      *  @see objectForKey(intptr_t)
      */
-    CCObject* objectForKey(const gd::string& key);
+    CCObject* objectForKey(const gd::string& key)
+#ifdef __ANDROID__
+    asm("_ZN7cocos2d12CCDictionary12objectForKeyERKSs")
+#endif
+    ;
     
     /**
      *  Get the object according to the specified integer key.
@@ -270,7 +274,11 @@ public:
      *  @param key      The string key for searching.
      *  @see setObject(CCObject*, intptr_t)
      */
-    void setObject(CCObject* pObject, const gd::string& key);
+    void setObject(CCObject* pObject, const gd::string& key)
+#ifdef __ANDROID__
+    asm("_ZN7cocos2d12CCDictionary9setObjectEPNS_8CCObjectERKSs")
+#endif
+    ;
     
     /** Insert an object to dictionary, and match it with the specified string key.
      *

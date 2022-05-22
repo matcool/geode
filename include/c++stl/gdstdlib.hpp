@@ -13,21 +13,18 @@ namespace geode::base {
 #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_ANDROID)
 namespace gd {
 	struct _internal_string {
-		uintptr_t      m_len;
-		uintptr_t      m_capacity;
-		int                m_refcount;
+		size_t m_len;
+		size_t m_capacity;
+		int m_refcount;
 	};
 
 	class string {
 	public:
 		string();
-		string(char const* ok);
-		string(std::string ok) : string(ok.c_str()) {}
-		operator std::string() {
-			return std::string((char*)m_data, m_data[-1].m_len);
-		}
+		string(char const* c_str);
+		string(const std::string& ok) : string(ok.c_str()) {}
 		operator std::string() const {
-			return std::string((char*)m_data, m_data[-1].m_len);
+			return std::string(reinterpret_cast<char*>(m_data), m_data[-1].m_len);
 		}
 		string(string const& ok);
 		string& operator=(char const* ok);
@@ -36,6 +33,12 @@ namespace gd {
 		char const* c_str() const {return (char const*)m_data; }
 	 protected: 
 		_internal_string*       m_data;
+#ifdef GEODE_IS_ANDROID
+		void assign(const char*);
+		void assign(const string&);
+		void clear_data();
+		void set_data(const char*, const size_t);
+#endif
 	};
 
 	struct _rb_tree_base {
