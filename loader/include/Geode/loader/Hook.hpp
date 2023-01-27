@@ -2,8 +2,8 @@
 
 #include "../DefaultInclude.hpp"
 #include "../utils/general.hpp"
-#include "../external/json/json_fwd.hpp"
 #include "Tulip.hpp"
+#include <json.hpp>
 #include <inttypes.h>
 #include <string_view>
 #include <tulip/TulipHook.hpp>
@@ -104,7 +104,7 @@ namespace geode {
          * Get info about the hook as JSON
          * @note For IPC
          */
-        nlohmann::json getRuntimeInfo() const;
+        json::Value getRuntimeInfo() const;
 
         /**
          * Get the metadata of the hook.
@@ -197,6 +197,6 @@ namespace geode {
          * Get info about the patch as JSON
          * @note For IPC
          */
-        nlohmann::json getRuntimeInfo() const;
+        json::Value getRuntimeInfo() const;
     };
 }

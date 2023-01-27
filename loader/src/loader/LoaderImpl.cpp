@@ -701,29 +701,33 @@ bool Loader::Impl::isNewUpdateDownloaded() const {
     return m_isNewUpdateDownloaded;
 }
 
-nlohmann::json Loader::Impl::processRawIPC(void* rawHandle, std::string const& buffer) {
-    nlohmann::json reply;
+json::Value Loader::Impl::processRawIPC(void* rawHandle, std::string const& buffer) {
+    json::Value reply;
+
+    // parse received message
+    json::Value json;
     try {
-        // parse received message
-        auto json = nlohmann::json::parse(buffer);
-        if (!json.contains("mod") || !json["mod"].is_string()) {
-            log::warn("Received IPC message without 'mod' field");
-            return reply;
-        }
-        if (!json.contains("message") || !json["message"].is_string()) {
-            log::warn("Received IPC message without 'message' field");
-            return reply;
-        }
-        nlohmann::json data;
-        if (json.contains("data")) {
-            data = json["data"];
-        }
-        // log::debug("Posting IPC event");
-        // ! warning: if the event system is ever made asynchronous this will break!
-        IPCEvent(rawHandle, json["mod"], json["message"], data, reply).post();
-    } catch(...) {
+        json = json::parse(buffer);
+    } catch (...) {
         log::warn("Received IPC message that isn't valid JSON");
+        return reply;
     }
+
+    if (!json.contains("mod") || !json["mod"].is_string()) {
+        log::warn("Received IPC message without 'mod' field");
+        return reply;
+    }
+    if (!json.contains("message") || !json["message"].is_string()) {
+        log::warn("Received IPC message without 'message' field");
+        return reply;
+    }
+    json::Value data;
+    if (json.contains("data")) {
+        data = json["data"];
+    }
+    // log::debug("Posting IPC event");
+    // ! warning: if the event system is ever made asynchronous this will break!
+    IPCEvent(rawHandle, json["mod"].as_string(), json["message"].as_string(), data, reply).post();
     return reply;
 }
 

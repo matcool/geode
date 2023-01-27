@@ -1,6 +1,6 @@
 #include "FileWatcher.hpp"
 
-#include <Geode/external/json/json.hpp>
+#include <json.hpp>
 #include <Geode/loader/Dirs.hpp>
 #include <Geode/loader/Index.hpp>
 #include <Geode/loader/Loader.hpp>
@@ -142,7 +142,7 @@ namespace geode {
 
         bool didLastLaunchCrash() const;
 
-        nlohmann::json processRawIPC(void* rawHandle, std::string const& buffer);
+        json::Value processRawIPC(void* rawHandle, std::string const& buffer);
 
         void queueInGDThread(ScheduledFunction func);
         void executeGDThreadQueue();
